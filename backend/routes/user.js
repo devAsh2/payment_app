@@ -16,11 +16,13 @@ const signupBody = z.object({
 });
 
 router.post("/signup", async (req, res) => {
+  console.log("received signup request with body", req.body);
   const { success } = signupBody.safeParse(req.body);
-  console.log(success);
+  console.log("zod validation result:",success);
   
 
   if (!success) {
+    console.error("Zod validation failed!");
     return res.status(411).json({
       message: "Email already taken / Incorrect inputs",
     });
@@ -31,6 +33,7 @@ router.post("/signup", async (req, res) => {
   });
 
   if (existingUser) {
+    console.error("User with this email already exists.");
     return res.status(411).json({
       message: "Email already taken/Incorrect inputs",
     });

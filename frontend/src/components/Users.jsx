@@ -30,7 +30,7 @@ export const Users = () => {
       </div>
       <div>
         {users.map((user) => (
-          <User user={user} />
+          <User key={user._id} user={user} />
         ))}
       </div>
     </>

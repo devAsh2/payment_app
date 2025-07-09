@@ -35,14 +35,14 @@ export const Signup = () => {
             label={"Last Name"}
           />
           <InputBox
-            onChange={(e) => {
+            onChange={e => {
               setUsername(e.target.value);
             }}
             placeholder="ash@gmail.com"
             label={"Email"}
           />
           <InputBox
-            onChange={(e) => {
+            onChange={e => {
               setPassword(e.target.value);
             }}
             placeholder="123456"
@@ -54,12 +54,13 @@ export const Signup = () => {
                 const response = await axios.post(
                   "http://localhost:3000/api/v1/user/signup",
                   {
-                    username,
-                    firstName,
-                    lastName,
+                    username: username.trim(), // Ensure no leading/trailing spaces
+                    firstName: firstName.trim(),
+                    lastName: lastName.trim(),
                     password,
                   }
                 );
+                console.log(response);
                 localStorage.setItem("token", response.data.token);
                 navigate("/dashboard");
               }}
